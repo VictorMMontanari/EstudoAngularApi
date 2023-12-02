@@ -1,14 +1,26 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService, Product } from './products.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'ProjetoAngular';
+export class AppComponent implements OnInit {
+  products: Product[] = [];
+
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe(
+      (products) => {
+        console.log(products); // Adicione este log para verificar os dados
+        this.products = products;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  
 }
