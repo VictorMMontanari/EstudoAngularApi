@@ -24,7 +24,7 @@ export class ProductsService {
 // products.service.ts
 export interface Product {
     id: number;
-    title: string; // Altere de 'name' para 'title'
+    title: string; 
     description: string;
     price: number;
     // Adicione outras propriedades conforme necessário
