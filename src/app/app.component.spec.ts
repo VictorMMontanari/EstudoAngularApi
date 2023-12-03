@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { ComponentFixture } from '@angular/core/testing'; // Correção aqui
+import { ComponentFixture } from '@angular/core/testing'; 
 
 describe('AppComponent', () => {
   let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>; // Correção aqui
+  let fixture: ComponentFixture<AppComponent>; 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

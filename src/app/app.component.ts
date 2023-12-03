@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.getProducts().subscribe(
       (products) => {
-        console.log(products); // Adicione este log para verificar os dados
         this.products = products;
       },
       (error) => {
@@ -22,5 +21,4 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  
 }
