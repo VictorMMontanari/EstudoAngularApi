@@ -27,6 +27,8 @@ export interface Product {
     title: string; 
     description: string;
     price: number;
+    image: string;
+    category: string;
     // Adicione outras propriedades conforme necessário
   }
   

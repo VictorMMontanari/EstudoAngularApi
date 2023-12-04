@@ -1,9 +1,28 @@
-<ul>
+<!-- <ul>
     <li *ngFor="let product of produtos" class="list-item">
       <h3>{{ product.title }}</h3>
-      <p>Description: {{ product.description }}</p>
+      <img src="{{product.image}}">
       <p>Price: {{ product.price | currency:'USD':'symbol':'1.2-2' }}</p>
-      <!-- Adicione mais detalhes conforme necessário -->
+
     </li>
-  </ul>
+</ul> -->
+<div *ngFor="let product of produtos" class="col-12 col-sm-4 col-md-3 col-lg-3">
+  <div class="card mb-3 hover">
+    <div class="image-container">
+      <img [src]="product.img" decoding="async" class="card-img" alt="Imagem do Produto" />
+    </div>
+    <h5 class="th4">{{ product.title | slice: 0:6 }}</h5>
+    <div class="card-body text-center">
+      <div>
+        <!-- <p>Nota: {{ product.avaliacao }}</p> -->
+        <h6 class="modal-title fs-5" id="exampleModalLabel">Categoria:</h6>
+        <p class="fs-6" id="exampleModalLabel">{{ product.category }}</p>
+        <span>
+          R$ {{ product.price.toFixed(2) }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
   
