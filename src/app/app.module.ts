@@ -3,15 +3,17 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { LoaderComponent } from './loader/loader.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
+    LoaderComponent,
     // outros componentes, diretivas, pipes
   ],
   imports: [
-
     BrowserModule,
     HttpClientModule, // Adicione esta linha
     // outros módulos necessários
