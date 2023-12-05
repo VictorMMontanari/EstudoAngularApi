@@ -13,7 +13,7 @@
   
   .principal {
     grid-area: principal;
-    height: calc(114vh - 90px); 
+    height: calc(110vh - 99px); 
     padding: 10px;
   }
   

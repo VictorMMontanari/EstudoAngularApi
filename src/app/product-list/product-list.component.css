@@ -1,0 +1,38 @@
+.card-img {
+    max-width: 150px;
+    max-height: 150px;
+    padding: 16px 0px 16px 0px;
+    width: auto;
+    height: auto;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.164);
+}
+
+.th4 {
+    margin: 0px;
+    color: #000000;
+    padding: 10px 2rem 0px 2rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hover:hover {
+    box-shadow: 0 0 6px 5px #ddd;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.link {
+    display: inline;
+    text-decoration: none;
+    cursor: pointer;
+}
