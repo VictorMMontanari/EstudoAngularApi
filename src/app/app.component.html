@@ -1,14 +1,16 @@
 <main class="principal">
   <div class="container conteudo">
     <div class="conteudo2">
-
-
-          <div class="text-center">
-            <div class="card-body row g-3">
-              <app-product-list [produtos]="products"></app-product-list>
-            </div>
-          </div>
+      <div class="text-center">
+        <div class="card-body row g-3">
+          <ng-container *ngIf="products && products.length; else loaderBlock">
+            <app-product-list [produtos]="products"></app-product-list>
+          </ng-container>
+          <ng-template #loaderBlock>
+            <app-loader></app-loader>
+          </ng-template>
         </div>
       </div>
-
+    </div>
+  </div>
 </main>
