@@ -1,6 +1,24 @@
+<app-navbar></app-navbar>
+
 <main class="principal">
   <div class="container conteudo">
     <div class="conteudo2">
+
+      <div class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+          <input type="text" class="form-control" id="searchTerm" [(ngModel)]="searchTerm" (input)="filterProducts()" placeholder="Nome do Produto"/>
+        </div>
+        <div class="col-12">
+          <label for="selectedOption" class="visually-hidden">Ordenar por:</label>
+          <select class="form-select" id="selectedOption" [(ngModel)]="selectedOption" (change)="filterProducts()">
+            <option value="">Selecione...</option>
+            <option value="maior">Maior Preço</option>
+            <option value="menor">Menor Preço</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
       <div class="text-center">
         <div class="card-body row g-3">
           <ng-container *ngIf="products && products.length; else loaderBlock">
@@ -11,6 +29,6 @@
           </ng-template>
         </div>
       </div>
-    </div>
+    
   </div>
 </main>

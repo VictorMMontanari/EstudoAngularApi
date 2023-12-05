@@ -1,6 +1,7 @@
 <!-- Seção de Produtos -->
 <div class="row">
   <div class="col">
+    <div class="text-center conteudo2">
     <div class="card-body row g-3">
       <div *ngFor="let product of produtos" class="col-12 col-sm-4 col-md-3 col-lg-3">
         <a class="link" [attr.data-bs-target]="'#exampleModal-' + product.id" data-bs-toggle="modal">
@@ -24,6 +25,7 @@
       </div>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- Modais -->
@@ -35,7 +37,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      
+        <div class="image-container">
+          <img [src]="product.image" decoding="async" class="card-img" alt="Imagem do Produto" />
+        </div>
+
       </div>
       <div class="modal-footer">
       
