@@ -13,6 +13,8 @@ import { FakeapiModule } from './fakeapi/fakeapi.module';
 import { LoaderModule } from './loader/loader.module';
 import { StarRatingtModule } from './star-rating/star-rating.module';
 import { PokeapiModule } from './pokeapi/pokeapi.module';
+import { PokeListModule } from './pokelist/pokelist.module';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { PokeapiModule } from './pokeapi/pokeapi.module';
     FakeapiModule,
     PokeapiModule,
     ProductListModule,
+    PokeListModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

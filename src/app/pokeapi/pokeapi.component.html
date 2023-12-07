@@ -1,4 +1,14 @@
-<p>pokeapi works!</p>
-<div *ngFor="let pokemon of pokemons">
-    <h1>{{ pokemon.name }}</h1>
-  </div>
+<main class="principal">
+    <div class="container conteudo">
+      <div class="conteudo2">
+        <ng-container *ngIf="pokemons && pokemons.length; else loaderBlock">
+            <app-pokelist [pokemon]="pokemons"></app-pokelist>
+        </ng-container>
+        <ng-template #loaderBlock>
+            <app-loader></app-loader>
+        </ng-template>
+        
+      </div>
+    </div>
+</main>
+
