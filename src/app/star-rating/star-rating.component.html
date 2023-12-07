@@ -1,0 +1,10 @@
+<div class="star-rating">
+    <span *ngFor="let i of getArray(maxRating); let index = index" [ngClass]="{
+      'star': true,
+      'filled': i <= currentRating,
+      'half-filled': i - 0.5 === currentRating
+    }">
+      &#9733;
+    </span>
+  </div>
+  

@@ -13,6 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FakeapiModule } from './fakeapi/fakeapi.module';
 import { LoaderModule } from './loader/loader.module';
+import { StarRatingtModule } from './star-rating/star-rating.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,7 @@ import { LoaderModule } from './loader/loader.module';
     // outros componentes, diretivas, pipes
   ],
   imports: [
+    StarRatingtModule,
     CommonModule,
     FakeapiModule,
     ProductListModule,
