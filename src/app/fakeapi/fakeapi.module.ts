@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Importe o CommonModule
 import { FormsModule } from '@angular/forms';
 import { FakeapiComponent } from './fakeapi.component';
-import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductListModule } from '../product-list/product-list.module';
 import { LoaderModule } from '../loader/loader.module';
 
