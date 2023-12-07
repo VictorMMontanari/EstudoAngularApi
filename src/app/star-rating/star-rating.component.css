@@ -1,0 +1,21 @@
+.star-rating {
+    display: flex;
+  }
+  
+  .star {
+    font-size: 24px;
+    margin: 0 2px;
+  }
+  
+  .filled {
+    color: gold;  /* Utilizando amarelo como cor para estrelas preenchidas */
+  }
+  
+  .half-filled::before {
+    content: "\2605";  /* Utilizando um caractere de estrela para meias estrelas */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: gold;
+  }
+  

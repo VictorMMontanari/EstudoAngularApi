@@ -58,5 +58,6 @@ export interface Product {
   price: number;
   image: string;
   category: string;
+  rating: number;
   // Adicione outras propriedades conforme necessário
 }
