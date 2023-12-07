@@ -1,5 +1,5 @@
+// product-list.component.ts
 import { Component, Input } from '@angular/core';
-import { Product } from '../products.service';
 
 @Component({
   selector: 'app-product-list',
