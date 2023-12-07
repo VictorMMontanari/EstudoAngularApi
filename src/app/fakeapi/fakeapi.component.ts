@@ -3,7 +3,6 @@ import { ProductsService, Product } from '../fakeapi/products.service';
 
 @Component({
   selector: 'app-fakeapi',
-
   templateUrl: './fakeapi.component.html',
   styleUrls: ['./fakeapi.component.css'] // Corrija "styleUrl" para "styleUrls"
 })

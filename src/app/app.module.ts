@@ -5,15 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
-
 import { AppComponent } from './app.component';
-// import { ProductListComponent } from './product-list/product-list.component'; // Remova esta linha
 import { ProductListModule } from './product-list/product-list.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FakeapiModule } from './fakeapi/fakeapi.module';
 import { LoaderModule } from './loader/loader.module';
 import { StarRatingtModule } from './star-rating/star-rating.module';
+import { PokeapiModule } from './pokeapi/pokeapi.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +24,7 @@ import { StarRatingtModule } from './star-rating/star-rating.module';
     StarRatingtModule,
     CommonModule,
     FakeapiModule,
+    PokeapiModule,
     ProductListModule,
     BrowserModule,
     HttpClientModule,
