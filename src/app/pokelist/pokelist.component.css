@@ -1,0 +1,11 @@
+.hover:hover {
+    box-shadow: 0 0 6px 5px #ddd;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.link {
+    display: inline;
+    text-decoration: none;
+    cursor: pointer;
+}

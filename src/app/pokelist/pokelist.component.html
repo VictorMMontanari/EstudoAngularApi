@@ -1,7 +1,38 @@
-<p>pokelist works!</p>
-
+<!-- <p>pokelist works!</p> -->
+<!-- 
 <div *ngFor="let pokemon of pokemon">
     <h1>{{ pokemon.name }}</h1>
     <p>{{pokemon.url}}</p>
-    
+    <p>ID: {{ getPokemonId(pokemon.url) }}</p>
+    <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonId(pokemon.url) + '.png'" decoding="async" class="card-img" alt="Imagem do Produto" />
+
+
+</div> -->
+<!-- <div *ngFor="let pokemon of pokemons" class="pokemon-card">
+    <img [src]="pokemon.url" alt="{{ pokemon.name }}">
+    <div class="pokemon-details">
+      <h3>{{ formatName(pokemon.name) }}</h3>
+       Adicione outras propriedades do Pokémon conforme necessário 
+    </div>
+  </div> -->
+<div class="row">
+    <div class="col">
+        <div class="text-center">
+            <div class="card-body row g-3">
+                <div  *ngFor="let pokemon of pokemons" class="col-12 col-sm-4 col-md-3 col-lg-3">
+                    <a class="link" :data-bs-target="`#exampleModal-${idpk}`" data-bs-toggle="modal">
+                      <div class="card mb-3 hover" style="height: 100%;">
+                        <h5 class="th4">{{ formatName(pokemon.name) }}</h5>
+                        <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + pokemon.id + '.png'" decoding="async" class="card-img" alt="Imagem do Produto" />
+                        <div class="card-body text-center">
+                            <div *ngIf="pokemon.types && pokemon.types.length">
+                                <!-- Usando *ngFor para iterar sobre 'pokemon.types' -->
+                                <p *ngFor="let type of pokemon.types">{{ type.type.name }}</p>
+                              </div>
+                        </div>
+                      </div>
+                    </a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -2,11 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokelistComponent } from './pokelist.component';
-import { StarRatingtModule } from '../star-rating/star-rating.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [PokelistComponent],
-    imports: [CommonModule],
+    imports: [CommonModule, HttpClientModule],
     exports: [PokelistComponent],
   })
   export class PokeListModule {}
