@@ -7,7 +7,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class PokeService {
-  private apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
+  private apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=40';
   private pokeSubject = new BehaviorSubject<PokemonInfo[]>([]);
   pokemons$: Observable<PokemonInfo[]> = this.pokeSubject.asObservable();
 

@@ -10,7 +10,6 @@ export class FakeapiComponent implements OnInit {
   products: Product[] = [];
   searchTerm: string = '';
   selectedOption: string = '';
-  selectedOptionC: string = '';
 
   constructor(private productsService: ProductsService) { }
 

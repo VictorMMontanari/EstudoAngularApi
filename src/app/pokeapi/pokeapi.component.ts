@@ -9,6 +9,7 @@ import { PokeService, Pokemon } from './pokeapi.service';
 })
 export class PokeapiComponent implements OnInit {
   pokemons: Pokemon[] = [];
+  searchTerm: string = '';
 
   constructor(private pokeService: PokeService) {}
 
@@ -16,6 +17,7 @@ export class PokeapiComponent implements OnInit {
     this.pokeService.getPokemons().subscribe(
       (pokemonsWithDetails: Pokemon[]) => {
         this.pokemons = pokemonsWithDetails;
+        console.log(this.pokemons)
       },
       (error: any) => {
         console.log(error);
