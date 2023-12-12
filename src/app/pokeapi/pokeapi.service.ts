@@ -7,9 +7,9 @@ import { catchError, map, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class PokeService {
-  private apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=40';
-  private pokeSubject = new BehaviorSubject<PokemonInfo[]>([]);
-  pokemons$: Observable<PokemonInfo[]> = this.pokeSubject.asObservable();
+  private apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=493';
+  private pokeSubject = new BehaviorSubject<Pokemon[]>([]);
+  pokemons$: Observable<Pokemon[]> = this.pokeSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -30,25 +30,22 @@ export class PokeService {
         );
       }),
       map((pokemonDetails: Pokemon[]) => {
-        return pokemonDetails.map((detail) => ({
-          id: detail.id,
-          name: detail.name,
-          types: detail.types,
-          typeDetails: detail.types.map((type) => ({
-            name: type.type.name,
-            url: type.type.url,
-            // Adicione outras propriedades relacionadas aos tipos conforme necessário
-          })),
-          sprites: {
-            front_default: detail.sprites.front_default,
-          },
-          url: `https://pokeapi.co/api/v2/pokemon/${detail.id}/`, // Adicione a propriedade url aqui
-          // Adicione outras propriedades conforme necessário
-        }));
-      }),
-      map((pokemonsWithDetails) => {
-        this.pokeSubject.next(pokemonsWithDetails);
-        return pokemonsWithDetails;
+        this.pokeSubject.next(pokemonDetails);
+        return pokemonDetails;
+      })
+    );
+  }
+
+  filterPokemons(searchTerm: string, selectedOption: string): Observable<Pokemon[]> {
+    return this.pokemons$.pipe(
+      map((pokemons) => {
+        return pokemons.filter((pokemon) => {
+          const nameMatch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+          const typeMatch =
+            selectedOption === 'ALL...' || pokemon.types.some((type) => type.type.name === selectedOption.toLowerCase());
+
+          return nameMatch && typeMatch;
+        });
       })
     );
   }
@@ -62,7 +59,11 @@ export interface PokemonInfo {
 export interface Pokemon {
   id: number;
   name: string;
-  types: { slot: number; type: { name: string; url: string } }[];
+  types: {
+    name: string;
+    slot: number;
+    type: { name: string; url: string };
+  }[];
   typeDetails?: { name: string; url: string }[];
   sprites: {
     front_default: string;

@@ -14,6 +14,7 @@ import { LoaderModule } from './loader/loader.module';
 import { StarRatingtModule } from './star-rating/star-rating.module';
 import { PokeapiModule } from './pokeapi/pokeapi.module';
 import { PokeListModule } from './pokelist/pokelist.module';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { PokeListModule } from './pokelist/pokelist.module';
     // outros componentes, diretivas, pipes
   ],
   imports: [
+    NgxPaginationModule,
     StarRatingtModule,
     CommonModule,
     FakeapiModule,
