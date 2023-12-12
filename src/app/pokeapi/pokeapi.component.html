@@ -3,12 +3,11 @@
     <div class="conteudo2">
       <form class="row row-cols-lg-auto g-3 align-items-center">
         <div class="col-12">
-          <input id="inline-form-input-name" id="searchTerm" [(ngModel)]="searchTerm" class="form-control mb-2 mb-sm-0 mr-sm-2" placeholder="Nome do Pokemon"
-            v-model="search" />
+          <input [(ngModel)]="searchTerm" (ngModelChange)="filterPokemons()" name="searchTerm" class="form-control mb-2 mb-sm-0 mr-sm-2" placeholder="Nome do Pokemon" />
         </div>
         <div class="col-12">
-          <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-          <select class="form-select" id="inlineFormSelectPref" v-model="selectedOption">
+          <label class="visually-hidden" for="inlineFormSelectPref">Tipo</label>
+          <select [(ngModel)]="selectedOption" (ngModelChange)="filterPokemons()" name="selectedOption" class="form-select" id="inlineFormSelectPref">
             <option selected>ALL...</option>
             <option value="bug">bug</option>
             <option value="dragon">dragon</option>
@@ -33,11 +32,17 @@
     </div>
     <div class="conteudo2">
       <ng-container *ngIf="pokemons && pokemons.length; else loaderBlock">
-        <app-pokelist [pokemons]="pokemons"></app-pokelist>
+        <app-pokelist [pokemons]="pokemons | paginate: { itemsPerPage: 20, currentPage: p }"></app-pokelist>
       </ng-container>
       <ng-template #loaderBlock>
         <app-loader></app-loader>
       </ng-template>
+    </div>
+    <div class="conteudo3">
+      <div class="pagination">       
+        <pagination-controls (pageChange)="p = $event">
+        </pagination-controls>
+      </div>
     </div>
   </div>
 </main>
