@@ -106,3 +106,16 @@
     background-color: #fa92f1;
     border: 2px solid;
   }  
+
+  .img {
+    display: inline-block;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.041);
+    border-radius: 8px;
+    background-color: rgba(85, 84, 84, 0.13);
+  }
+
+  .titlebottom {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.041);
+    border-radius: 8px;
+    background-color: rgba(85, 84, 84, 0.13);
+  }

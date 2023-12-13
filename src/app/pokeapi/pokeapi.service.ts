@@ -36,7 +36,7 @@ export class PokeService {
     );
   }
 
-  filterPokemons(searchTerm: string, selectedOption: string): Observable<Pokemon[]> {
+  filterPokemons(searchTerm: string, selectedOption: string, currentPage: number): Observable<Pokemon[]> {
     return this.pokemons$.pipe(
       map((pokemons) => {
         return pokemons.filter((pokemon) => {
