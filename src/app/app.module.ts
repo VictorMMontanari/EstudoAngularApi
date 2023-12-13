@@ -14,7 +14,8 @@ import { LoaderModule } from './loader/loader.module';
 import { StarRatingtModule } from './star-rating/star-rating.module';
 import { PokeapiModule } from './pokeapi/pokeapi.module';
 import { PokeListModule } from './pokelist/pokelist.module';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import { NgxPaginationModule} from 'ngx-pagination'; 
+import { CoingeckoModule } from './coingecko/coingecko.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CommonModule,
     FakeapiModule,
     PokeapiModule,
+    CoingeckoModule,
     ProductListModule,
     PokeListModule,
     BrowserModule,
