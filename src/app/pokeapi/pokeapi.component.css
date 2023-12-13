@@ -17,6 +17,13 @@
     margin-top: 10px;
     border-radius: 10px;
 }
+
+
+ol.ngx-pagination, ul.ngx-pagination {
+  padding-left: 0rem !important;
+  padding-top: 1rem;
+}
+
   
   @media (max-width: 350px) {
     .pagination li {
