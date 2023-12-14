@@ -4,12 +4,6 @@
     border: 1px solid #dee2e6;
 }
 
-.link {
-    display: inline;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .tipo {
     display: inline-block;
     padding: 4px 8px;

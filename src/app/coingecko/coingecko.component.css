@@ -3,12 +3,13 @@
 @import 'primeng/resources/primeng.min.css';
 
 
-
-
-/* :host {
-    all: initial;
-    * {
-      all: unset;
-    }
-  }  */
+.acmodal {
+  text-decoration: none;
+  cursor: pointer;
+}
   
+.hover:hover {
+  box-shadow: 3px 6px 6px 3px #ddd;
+  border: 2px solid #dee2e6;
+}
+
