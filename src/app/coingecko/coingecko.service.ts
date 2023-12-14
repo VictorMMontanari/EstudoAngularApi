@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CoinsService {
-  private apiUrl = 'https://api.coingecko.com/api/v3/coins/markets';
+  private apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?sparkline=true';
   private coinsSubject = new BehaviorSubject<Coins[]>([]);
 
   coins$: Observable<Coins[]> = this.coinsSubject.asObservable();

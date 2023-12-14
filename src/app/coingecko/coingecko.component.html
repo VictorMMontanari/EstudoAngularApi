@@ -1,49 +1,137 @@
 <main class="principal">
-    <div class="container conteudo">
-            
-        <div class="card">
-            <p-table [value]="coins" (sortFunction)="customSort($event)" [customSort]="true"
-            [paginator]="true"
-            [rows]="10"
-            [showCurrentPageReport]="true"
-            [tableStyle]="{ 'min-width': '50rem' }"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            (onPage)="pageChange($event)"
-            [rowsPerPageOptions]="[10, 25, 50]"
+  <div class="container conteudo">
+    <div class="card">
+      <p-table
+        [value]="coins"
+        (sortFunction)="customSort($event)"
+        [customSort]="true"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onPage)="pageChange($event)"
+        [rowsPerPageOptions]="[10, 25, 50]"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="market_cap_rank" style="width: 20%">
+              Market Cap Rank <p-sortIcon field="market_cap_rank"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name" style="width: 20%">
+              Name <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="symbol" style="width: 20%">
+              Symbol <p-sortIcon field="symbol"></p-sortIcon>
+            </th>
+            <th pSortableColumn="current_price" style="width: 20%">
+              Current Price <p-sortIcon field="current_price"></p-sortIcon>
+            </th>
+            <th pSortableColumn="high_24h" style="width: 20%">
+              High 24h <p-sortIcon field="high_24h"></p-sortIcon>
+            </th>
+            <th pSortableColumn="low_24h" style="width: 20%">
+              Low 24h <p-sortIcon field="low_24h"></p-sortIcon>
+            </th>
+            <th
+              pSortableColumn="price_change_percentage_24h"
+              style="width: 20%"
             >
-            <ng-template pTemplate="header">
-                <tr>
-                  <th pSortableColumn="market_cap_rank" style="width:20%">Market Cap Rank <p-sortIcon field="market_cap_rank"></p-sortIcon></th>
-                  <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
-                  <th pSortableColumn="symbol" style="width:20%">Symbol <p-sortIcon field="symbol"></p-sortIcon></th>
-                  <th pSortableColumn="current_price" style="width:20%">Current Price <p-sortIcon field="current_price"></p-sortIcon></th>  
-                  <th pSortableColumn="high_24h" style="width:20%">High 24h <p-sortIcon field="high_24h"></p-sortIcon></th>
-                  <th pSortableColumn="low_24h" style="width:20%">Low 24h <p-sortIcon field="low_24h"></p-sortIcon></th>
-                  <th pSortableColumn="price_change_percentage_24h" style="width:20%">Price Change 24h <p-sortIcon field="price_change_percentage_24h"></p-sortIcon></th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-coin>
-                <tr>
-                  <td class="text-center">{{ coin.market_cap_rank }}</td>
-                  <td class="d-flex align-items-center">
-                    <img [src]="coin.image" [class]="'flag flag-' + (coin.image?.code || 'default')" style="width: 30px;">
-                    <span class="ml-1 vertical-align-middle" style="margin-left: 2rem;">{{ coin.name }}</span>
-                  </td>
-                  <td class="text-center">{{ coin.symbol }}</td>
-                  <td class="text-center">{{ coin.current_price | currency: 'USD' }}</td>
-                  <td class="text-center">{{ coin.high_24h | currency: 'USD' }}</td>
-                  <td class="text-center">{{ coin.low_24h | currency: 'USD' }}</td>
-                  <td class="text-center">{{ coin.price_change_percentage_24h | number: '1.2-2' }}</td> 
-                </tr>
-              </ng-template>
-                <ng-template pTemplate="paginatorleft">
-                    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-                </ng-template>
-                <ng-template pTemplate="paginatorright">
-                    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
-</main>
+              Price Change 24h
+              <p-sortIcon field="price_change_percentage_24h"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-coin>
+          <tr
+            class="acmodal hover"
+            [attr.data-bs-target]="'#exampleModal-' + coin.id"
+            data-bs-toggle="modal"
+          >
+            <td class="text-center">{{ coin.market_cap_rank }}</td>
+            <td class="d-flex align-items-center">
+              <img
+                [src]="coin.image"
+                [class]="'flag flag-' + (coin.image?.code || 'default')"
+                style="width: 30px"
+              />
+              <span
+                class="ml-1 vertical-align-middle"
+                style="margin-left: 2rem"
+                >{{ coin.name }}</span
+              >
+            </td>
+            <td class="text-center">{{ coin.symbol }}</td>
+            <td class="text-center">
+              {{ coin.current_price | currency : "USD" }}
+            </td>
+            <td class="text-center">{{ coin.high_24h | currency : "USD" }}</td>
+            <td class="text-center">{{ coin.low_24h | currency : "USD" }}</td>
+            <td class="text-center">
+              {{ coin.price_change_percentage_24h | number : "1.2-2" }}
+            </td>
+          </tr>
+          <!-- <p-dialog [header]="selectedCoin?.name" [id]="selectedCoin?.id" [(visible)]="visible" [style]="{ width: '50vw' }" [maximizable]="true">
+                  <div class="p-fluid" >
+                    
+                  </div>
+                </p-dialog>  -->
+          <div
+            class="modal fade"
+            [id]="'exampleModal-' + coin.id"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    {{ coin.name }}
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <p>Sparkline in 7d Prices:</p>
+                  <div>
+                    <canvas baseChart
+                        [datasets]="chartData.datasets"
+                        [labels]="chartData.labels"
+                        [options]="{ responsive: true }"
+                        [legend]="true"
+                        type="line"
+                      ></canvas>
+                  </div>
+                </div>
+                <div class="modal-footer">
 
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+          <p-button
+            type="button"
+            icon="pi pi-plus"
+            styleClass="p-button-text"
+          ></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+          <p-button
+            type="button"
+            icon="pi pi-cloud"
+            styleClass="p-button-text"
+          ></p-button>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</main>
