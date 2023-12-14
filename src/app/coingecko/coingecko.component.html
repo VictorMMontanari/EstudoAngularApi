@@ -76,46 +76,46 @@
                     
                   </div>
                 </p-dialog>  -->
-          <div
-            class="modal fade"
-            [id]="'exampleModal-' + coin.id"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div
-              class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            >
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    {{ coin.name }}
-                  </h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <p>Sparkline in 7d Prices:</p>
-                  <div>
-                    <canvas baseChart
-                        [datasets]="chartData.datasets"
-                        [labels]="chartData.labels"
-                        [options]="{ responsive: true }"
-                        [legend]="true"
-                        type="line"
-                      ></canvas>
-                  </div>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-              </div>
-            </div>
+                <div
+    class="modal fade"
+    [id]="'exampleModal-' + coin.id"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            {{ coin.name }}
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>Sparkline in 7d Prices:</p>
+          <div>
+            <canvas
+              *ngIf="chartData[coin.id]"
+              baseChart
+              [datasets]="chartData[coin.id].datasets"
+              [labels]="chartData[coin.id].labels"
+              [options]="{ responsive: true }"
+              [legend]="true"
+              type="line"
+            ></canvas>
           </div>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
           <p-button

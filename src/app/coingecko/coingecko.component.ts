@@ -21,7 +21,7 @@ export class CoingeckoComponent implements OnInit {
     this.coinsService.getCoins('usd').subscribe(
       data => {
         this.coins = data;
-        this.createChart();
+        this.coins.forEach(coin => this.createChart(coin));
       },
       error => console.error('Error fetching Coins', error)
     );
@@ -57,17 +57,17 @@ export class CoingeckoComponent implements OnInit {
       });
     }
   }
-  createChart() {
+  createChart(coin: Coins) {
     // Extraia os preços para o gráfico de linha
-    const price = this.coins.map(coin => coin.sparkline_in_7d.price);
-
+    const prices = coin.sparkline_in_7d?.price;
+  
     // Configure os dados do gráfico
-    this.chartData = {
-      labels: Array.from({ length: price.length }, (_, i) => i + 1),
+    this.chartData[coin.id] = {
+      labels: Array.from({ length: prices.length }, (_, i) => i + 1),
       datasets: [
         {
           label: 'Price in 7 days',
-          data: price,
+          data: prices,
           fill: true,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
