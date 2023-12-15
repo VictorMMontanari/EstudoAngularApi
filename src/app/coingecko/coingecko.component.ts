@@ -15,6 +15,11 @@ export class CoingeckoComponent implements OnInit {
   first = 0;
   rows = 10;
 
+  criptoMoeda: string = '';
+  moedaFiduciaria: string = 'usd';
+  quantidade: number = 0;
+  selectedCoin: Coins | null = null; // Adiciona a propriedade selectedCoin
+
   constructor(private coinsService: CoinsService) {}
 
   ngOnInit() {
@@ -25,7 +30,6 @@ export class CoingeckoComponent implements OnInit {
       },
       error => console.error('Error fetching Coins', error)
     );
-
   }
 
   pageChange(event: { first: number; rows: number }) {
@@ -57,11 +61,9 @@ export class CoingeckoComponent implements OnInit {
       });
     }
   }
-  createChart(coin: Coins) {
-    // Extraia os preços para o gráfico de linha
-    const prices = coin.sparkline_in_7d?.price;
   
-    // Configure os dados do gráfico
+  createChart(coin: Coins) {
+    const prices = coin.sparkline_in_7d?.price;
     this.chartData[coin.id] = {
       labels: Array.from({ length: prices.length }, (_, i) => i + 1),
       datasets: [
@@ -76,4 +78,28 @@ export class CoingeckoComponent implements OnInit {
     };
   }
 
+  resultadoConversao: number = 0;
+
+  // Método para configurar a criptomoeda selecionada
+  openModal(coin: Coins) {
+    this.selectedCoin = coin;
+  }
+
+  converterMoeda() {
+    this.coinsService
+      .convertCurrency(
+        this.selectedCoin?.id || '', // Usa a criptomoeda selecionada ou uma string vazia
+        this.moedaFiduciaria,
+        this.quantidade
+      )
+      .subscribe(
+        (resultado) => {
+          this.resultadoConversao = resultado;
+          console.log('Resultado da conversão:', this.resultadoConversao);
+        },
+        (error) => {
+          console.error('Erro ao converter moeda', error);
+        }
+      );
+  }
 }

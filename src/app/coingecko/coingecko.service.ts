@@ -10,9 +10,12 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class CoinsService {
   private apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?sparkline=true';
+  private convertUrl = 'https://api.coingecko.com/api/v3/simple/price';
   private coinsSubject = new BehaviorSubject<Coins[]>([]);
+  private convertSubject = new BehaviorSubject<number>(0); // Alteração aqui
 
   coins$: Observable<Coins[]> = this.coinsSubject.asObservable();
+  convert$: Observable<number> = this.convertSubject.asObservable(); // Alteração aqui
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +33,39 @@ export class CoinsService {
       })
     );
   }
+
+  convertCurrency(fromCurrency: string, toCurrency: string, amount: number): Observable<number> {
+    const params = new HttpParams()
+      .set('ids', fromCurrency)
+      .set('vs_currencies', toCurrency);
+  
+    return this.http.get<any>(this.convertUrl, { params }).pipe(
+      catchError((error) => {
+        console.error('Error fetching Convert', error);
+        return throwError(error);
+      }),
+      map((data) => {
+        const resultado = amount * data[fromCurrency][toCurrency];
+        console.log("Teste", data)
+        const resultadoFloat = parseFloat(resultado.toFixed(2));
+        return Number.isInteger(resultadoFloat) ? resultadoFloat : +resultadoFloat;
+      })
+    );
+  }
+  
+  
 }
+
+export interface Convert {
+  [key: string]: {
+    [key: string]: number;
+  };
+}
+
+
+
+
+
 
 export interface Coins {
     id: string;
