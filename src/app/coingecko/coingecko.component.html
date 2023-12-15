@@ -1,18 +1,10 @@
 <main class="principal">
   <div class="container conteudo">
     <div class="card">
-      <p-table
-        [value]="coins"
-        (sortFunction)="customSort($event)"
-        [customSort]="true"
-        [paginator]="true"
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        [tableStyle]="{ 'min-width': '50rem' }"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        (onPage)="pageChange($event)"
-        [rowsPerPageOptions]="[10, 25, 50]"
-      >
+      <p-table [value]="coins" (sortFunction)="customSort($event)" [customSort]="true" [paginator]="true" [rows]="15"
+        [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" (onPage)="pageChange($event)"
+        [rowsPerPageOptions]="[15, 25, 50]">
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="market_cap_rank" style="width: 20%">
@@ -33,33 +25,18 @@
             <th pSortableColumn="low_24h" style="width: 20%">
               Low 24h <p-sortIcon field="low_24h"></p-sortIcon>
             </th>
-            <th
-              pSortableColumn="price_change_percentage_24h"
-              style="width: 20%"
-            >
+            <th pSortableColumn="price_change_percentage_24h" style="width: 20%">
               Price Change 24h
               <p-sortIcon field="price_change_percentage_24h"></p-sortIcon>
             </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-coin>
-          <tr
-            class="acmodal hover"
-            [attr.data-bs-target]="'#exampleModal-' + coin.id"
-            data-bs-toggle="modal"
-          >
+          <tr class="acmodal hover" [attr.data-bs-target]="'#exampleModal-' + coin.id" data-bs-toggle="modal" (click)="openModal(coin)">
             <td class="text-center">{{ coin.market_cap_rank }}</td>
             <td class="d-flex align-items-center">
-              <img
-                [src]="coin.image"
-                [class]="'flag flag-' + (coin.image?.code || 'default')"
-                style="width: 30px"
-              />
-              <span
-                class="ml-1 vertical-align-middle"
-                style="margin-left: 2rem"
-                >{{ coin.name }}</span
-              >
+              <img [src]="coin.image" [class]="'flag flag-' + (coin.image?.code || 'default')" style="width: 30px" />
+              <span class="ml-1 vertical-align-middle" style="margin-left: 2rem">{{ coin.name }}</span>
             </td>
             <td class="text-center">{{ coin.symbol }}</td>
             <td class="text-center">
@@ -71,65 +48,78 @@
               {{ coin.price_change_percentage_24h | number : "1.2-2" }}
             </td>
           </tr>
-          <!-- <p-dialog [header]="selectedCoin?.name" [id]="selectedCoin?.id" [(visible)]="visible" [style]="{ width: '50vw' }" [maximizable]="true">
-                  <div class="p-fluid" >
-                    
+          <div class="modal fade" [id]="'exampleModal-' + coin.id" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    {{ coin.name }}
+                  </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Sparkline in 7d Prices:</p>
+                  <div>
+                    <canvas *ngIf="chartData[coin.id]" baseChart [datasets]="chartData[coin.id].datasets"
+                      [labels]="chartData[coin.id].labels" [options]="{ responsive: true }" [legend]="true"
+                      type="line"></canvas>
                   </div>
-                </p-dialog>  -->
-                <div
-    class="modal fade"
-    [id]="'exampleModal-' + coin.id"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div
-      class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            {{ coin.name }}
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>Sparkline in 7d Prices:</p>
-          <div>
-            <canvas
-              *ngIf="chartData[coin.id]"
-              baseChart
-              [datasets]="chartData[coin.id].datasets"
-              [labels]="chartData[coin.id].labels"
-              [options]="{ responsive: true }"
-              [legend]="true"
-              type="line"
-            ></canvas>
+
+                  <div class="container">
+                    <!-- Seção de Tabela de Criptomoedas -->
+                    <div class="card">
+                      <!-- ... (restante do seu código para a tabela de criptomoedas) -->
+                    </div>
+
+                    <!-- Seção de Conversor de Moeda -->
+                    <div class="card mt-4">
+                      <h2>Conversor de Moeda</h2>
+
+                      <!-- Seleção de Criptomoeda -->
+                      <div class="mb-3">
+                        <h2>{{ coin.name }}</h2>
+                        
+                      </div>
+
+                      <!-- Seleção de Moeda Fiduciária -->
+                      <div class="mb-3">
+                        <label for="moedaFiduciaria" class="form-label">Selecione a Moeda Fiduciária:</label>
+                        <select id="moedaFiduciaria" class="form-select" [(ngModel)]="moedaFiduciaria">
+                          <option value="usd">Dólar Americano (USD)</option>
+                          <option value="eur">Euro (EUR)</option>
+                          <option value="brl">Real (BRL)</option>
+                          <!-- Adicione outras opções conforme necessário -->
+                        </select>
+                      </div>
+
+                      <!-- Quantidade a Ser Convertida -->
+                      <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade:</label>
+                        <input type="number" id="quantidade" class="form-control" [(ngModel)]="quantidade" />
+                      </div>
+
+                      <!-- Botão para Iniciar Conversão -->
+                      <button class="btn btn-primary" (click)="converterMoeda()">Converter</button>
+
+                      <div>
+                        <h2>Resultado da Conversão: {{ resultadoConversao | currency: moedaFiduciaria.toUpperCase() }}
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer"></div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer"></div>
-      </div>
-    </div>
-  </div>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
-          <p-button
-            type="button"
-            icon="pi pi-plus"
-            styleClass="p-button-text"
-          ></p-button>
+          <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
         </ng-template>
         <ng-template pTemplate="paginatorright">
-          <p-button
-            type="button"
-            icon="pi pi-cloud"
-            styleClass="p-button-text"
-          ></p-button>
+          <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
         </ng-template>
       </p-table>
     </div>
