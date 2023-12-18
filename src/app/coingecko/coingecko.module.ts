@@ -8,11 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { NgChartsModule } from 'ng2-charts';
+import { LoaderModule } from '../loader/loader.module';
 import 'chart.js';
 
 @NgModule({
     declarations: [CoingeckoComponent],
-    imports: [ButtonModule, CommonModule, DialogModule, NgChartsModule, FormsModule, TableModule , BrowserModule, BrowserAnimationsModule],
+    imports: [ButtonModule, CommonModule,  DialogModule, NgChartsModule, FormsModule, TableModule , BrowserModule, BrowserAnimationsModule, LoaderModule],
   })
   export class CoingeckoModule {}
   

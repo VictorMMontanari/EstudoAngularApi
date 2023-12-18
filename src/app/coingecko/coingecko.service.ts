@@ -52,8 +52,6 @@ export class CoinsService {
       })
     );
   }
-  
-  
 }
 
 export interface Convert {
@@ -61,11 +59,6 @@ export interface Convert {
     [key: string]: number;
   };
 }
-
-
-
-
-
 
 export interface Coins {
     id: string;

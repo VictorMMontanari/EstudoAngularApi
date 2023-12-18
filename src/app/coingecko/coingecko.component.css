@@ -13,3 +13,33 @@
   border: 2px solid #dee2e6;
 }
 
+.bt-prim {
+  border-radius: 8px 0px 0px 8px;
+  width: 28%;
+}
+
+.bt-sec {
+  border-radius: 0px 0px 0px 0px;
+  list-style-type: none;
+}
+
+.bt-button {
+  border-radius: 0px 8px 8px 0px;
+  width: 25%;
+  background-color: #ddd;
+}
+
+.bt-button:hover {
+  background-color: #8d8d8d;
+  color: white;
+}
+
+.cardd {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 8px;
+}
+
+.result {
+  align-content:center;
+  margin: 8.3px;
+}
