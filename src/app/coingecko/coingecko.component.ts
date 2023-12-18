@@ -18,7 +18,8 @@ export class CoingeckoComponent implements OnInit {
   criptoMoeda: string = '';
   moedaFiduciaria: string = 'usd';
   quantidade: number = 0;
-  selectedCoin: Coins | null = null; // Adiciona a propriedade selectedCoin
+
+  selectedCoin!: Coins;
 
   constructor(private coinsService: CoinsService) {}
 
@@ -78,17 +79,17 @@ export class CoingeckoComponent implements OnInit {
     };
   }
 
-  resultadoConversao: number = 0;
+  resultadoConversao: number | null = null;
 
-  // Método para configurar a criptomoeda selecionada
   openModal(coin: Coins) {
     this.selectedCoin = coin;
   }
 
   converterMoeda() {
+    this.resultadoConversao = null; // Limpa o resultado enquanto aguarda a resposta
     this.coinsService
       .convertCurrency(
-        this.selectedCoin?.id || '', // Usa a criptomoeda selecionada ou uma string vazia
+        this.selectedCoin?.id,
         this.moedaFiduciaria,
         this.quantidade
       )
